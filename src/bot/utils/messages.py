@@ -26,8 +26,8 @@ def sub_clyde(username: Optional[str]) -> Optional[str]:
 
     if username:
         return re.sub(r"(clyd)(e)", replace_e, username, flags=re.I)
-    else:
-        return username  # Empty string or None
+
+    return username  # Empty string or None
 
 
 async def get_discord_message(ctx: Context, text: str) -> Union[Message, str]:

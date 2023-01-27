@@ -90,6 +90,7 @@ class InternalEval(commands.Cog):
 
             if "key" in data:
                 return f"https://paste.pythondiscord.com/{data['key']}"
+        # pylint: disable-next=broad-except
         except Exception:
             # 400 (Bad Request) means there are too many characters
             log.exception("Failed to upload `internal eval` output to paste service!")
@@ -161,6 +162,7 @@ class InternalEval(commands.Cog):
                 code = "\n".join(block.group("code") for block in blocks)
             else:
                 match = match[0] if len(blocks) == 0 else blocks[0]
+                # pylint: disable-next=unused-variable
                 code, block, lang, delim = match.group("code", "block", "lang", "delim")
 
         else:

@@ -56,3 +56,8 @@ addopts = "tests -r a -v --doctest-modules src"
 
 [tool.pylint.format]
 max-line-length = 120
+
+[tool.pylint.messages_control]
+disable = "W1203"
+# justifications:
+# W1203 (logging-fstring-interpolation) - developer UX

@@ -7,16 +7,19 @@ from typing import NamedTuple
 
 class Permissions(Enum):
     """Permissions enum"""
+
     CAN_INTERNAL_EVAL = "can_internal_eval"
 
 
 class Tokens(NamedTuple):
     """Authentication tokens for external services"""
+
     github = getenv("GITHUB_TOKEN")
 
 
 class Replies(NamedTuple):
     """Bot reply titles"""
+
     positive = (
         "Yep.",
         "Absolutely!",
@@ -69,8 +72,10 @@ class Replies(NamedTuple):
     )
 
 
+# pylint: disable-next=too-few-public-methods
 class Emojis:
     """Named emoji constants"""
+
     cross_mark = "\u274C"
     star = "\u2B50"
     christmas_tree = "\U0001F384"
@@ -139,6 +144,7 @@ class Emojis:
     lemon_pensive = "<:lemon_pensive:754441880246419486>"
 
 
+# pylint: disable-next=too-few-public-methods
 class Colours:
     """Named color constants"""
 
