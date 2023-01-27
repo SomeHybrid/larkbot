@@ -3,6 +3,7 @@
 from types import ModuleType
 
 import aiohttp
+from discord import Object
 from discord.ext import commands
 
 from bot import exts
@@ -52,3 +53,8 @@ class Bot(commands.Bot):
         await super().setup_hook()
 
         await self.load_extensions(exts)
+
+        guild = Object(id=1033456860864466995)
+        self.tree.copy_global_to(guild=guild)
+        synced = await self.tree.sync(guild=guild)
+        print(f"Synced {len(synced)} commands.")
