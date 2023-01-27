@@ -1,3 +1,5 @@
+"""Internal eval helpers"""
+
 import ast
 import collections
 import contextlib
@@ -46,6 +48,7 @@ EVAL_WRAPPER_FUNCTION_FRAMENAME = "_eval_wrapper_function"
 
 def format_internal_eval_exception(exc_info: ExcInfo, code: str) -> str:
     """Format an exception caught while evaluation code by inserting lines."""
+    # pylint: disable-next=invalid-name
     exc_type, exc_value, tb = exc_info
     stack_summary = traceback.StackSummary.extract(traceback.walk_tb(tb))
     code = code.split("\n")
@@ -63,15 +66,13 @@ def format_internal_eval_exception(exc_info: ExcInfo, code: str) -> str:
             line = frame.line
             name = frame.name
 
-        output.append(
-            f'  File "{frame.filename}", line {frame.lineno}, in {name}\n'
-            f"    {line}"
-        )
+        output.append(f'  File "{frame.filename}", line {frame.lineno}, in {name}\n' f"    {line}")
 
     output.extend(traceback.format_exception_only(exc_type, exc_value))
     return "\n".join(output)
 
 
+# pylint: disable-next=too-many-instance-attributes
 class EvalContext:
     """
     Represents the current `internal eval` context.
@@ -149,9 +150,11 @@ class EvalContext:
         compiled_code = compile(self.eval_tree, filename=INTERNAL_EVAL_FRAMENAME, mode="exec")
 
         log.info("Executing the compiled code with the desired namespace environment")
+        # pylint: disable-next=exec-used
         exec(compiled_code, self.locals)  # noqa: B102,S102
 
         log.info("Awaiting the created evaluation wrapper coroutine.")
+        # pylint: disable-next=not-callable
         await self.function()
 
         log.info("Returning the updated captured locals.")
@@ -194,6 +197,7 @@ class WrapEvalCodeTree(ast.NodeTransformer):
         new_tree = self.visit(self.wrapper)
         return ast.fix_missing_locations(new_tree)
 
+    # pylint: disable-next=invalid-name,unused-argument
     def visit_Pass(self, node: ast.Pass) -> list[ast.AST]:  # noqa: N802
         """
         Replace the `_ast.Pass` node in the wrapper function by the eval AST.
@@ -212,6 +216,7 @@ class CaptureLastExpression(ast.NodeTransformer):
         self.tree = tree
         self.last_node = list(ast.iter_child_nodes(tree))[-1]
 
+    # pylint: disable-next=invalid-name
     def visit_Expr(self, node: ast.Expr) -> ast.Expr | ast.Assign:  # noqa: N802
         """
         Replace the Expr node that is last child node of Module with an assignment.
@@ -230,7 +235,7 @@ class CaptureLastExpression(ast.NodeTransformer):
         right_hand_side = list(ast.iter_child_nodes(node))[0]
 
         assignment = ast.Assign(
-            targets=[ast.Name(id='_value_last_expression', ctx=ast.Store())],
+            targets=[ast.Name(id="_value_last_expression", ctx=ast.Store())],
             value=right_hand_side,
             lineno=node.lineno,
             col_offset=0,

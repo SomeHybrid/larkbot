@@ -1,14 +1,17 @@
+"""Internal eval"""
+
 import logging
 import re
 import textwrap
 from typing import Optional
 
 import discord
-from bot.utils.decorators import with_permission
 from discord.ext import commands
 
 from bot.bot import Bot
 from bot.constants import Permissions
+from bot.utils.decorators import with_permission
+
 from ._helpers import EvalContext
 
 __all__ = ["InternalEval"]
@@ -22,14 +25,14 @@ FORMATTED_CODE_REGEX = re.compile(
     r"(?P<code>.*?)"  # extract all code inside the markup
     r"\s*"  # any more whitespace before the end of the code markup
     r"(?P=delim)",  # match the exact same delimiter from the start again
-    re.DOTALL | re.IGNORECASE  # "." also matches newlines, case-insensitive
+    re.DOTALL | re.IGNORECASE,  # "." also matches newlines, case-insensitive
 )
 
 RAW_CODE_REGEX = re.compile(
     r"^(?:[ \t]*\n)*"  # any blank (empty or tabs/spaces only) lines before the code
     r"(?P<code>.*?)"  # extract all the rest as code
     r"\s*$",  # any trailing whitespace until the end of the string
-    re.DOTALL  # "." also matches newlines
+    re.DOTALL,  # "." also matches newlines
 )
 
 MAX_LENGTH = 99980
@@ -43,11 +46,7 @@ class InternalEval(commands.Cog):
         self.locals = {}
 
     @staticmethod
-    def shorten_output(
-        output: str,
-        max_length: int = 1900,
-        placeholder: str = "\n[output truncated]"
-    ) -> str:
+    def shorten_output(output: str, max_length: int = 1900, placeholder: str = "\n[output truncated]") -> str:
         """
         Shorten the `output` so it's shorter than `max_length`.
 
@@ -91,6 +90,7 @@ class InternalEval(commands.Cog):
 
             if "key" in data:
                 return f"https://paste.pythondiscord.com/{data['key']}"
+        # pylint: disable-next=broad-except
         except Exception:
             # 400 (Bad Request) means there are too many characters
             log.exception("Failed to upload `internal eval` output to paste service!")
@@ -162,6 +162,7 @@ class InternalEval(commands.Cog):
                 code = "\n".join(block.group("code") for block in blocks)
             else:
                 match = match[0] if len(blocks) == 0 else blocks[0]
+                # pylint: disable-next=unused-variable
                 code, block, lang, delim = match.group("code", "block", "lang", "delim")
 
         else:

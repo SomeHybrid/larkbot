@@ -1,17 +1,25 @@
+"""Constant values"""
+
+from enum import Enum
 from os import getenv
 from typing import NamedTuple
-from enum import Enum
 
 
 class Permissions(Enum):
+    """Permissions enum"""
+
     CAN_INTERNAL_EVAL = "can_internal_eval"
 
 
 class Tokens(NamedTuple):
+    """Authentication tokens for external services"""
+
     github = getenv("GITHUB_TOKEN")
 
 
 class Replies(NamedTuple):
+    """Bot reply titles"""
+
     positive = (
         "Yep.",
         "Absolutely!",
@@ -64,7 +72,10 @@ class Replies(NamedTuple):
     )
 
 
+# pylint: disable-next=too-few-public-methods
 class Emojis:
+    """Named emoji constants"""
+
     cross_mark = "\u274C"
     star = "\u2B50"
     christmas_tree = "\U0001F384"
@@ -81,10 +92,10 @@ class Emojis:
     dice_5 = "<:dice_5:755891608091885627>"
     dice_6 = "<:dice_6:755891607680843838>"
 
-    # These icons are from Github's repo https://github.com/primer/octicons/
+    # These icons are from GitHub's repo https://github.com/primer/octicons/
     issue_open = "<:IssueOpen:852596024777506817>"
     issue_closed = "<:IssueClosed:927326162861039626>"
-    issue_draft = "<:IssueDraft:852596025147523102>"  # Not currently used by Github, but here for future.
+    issue_draft = "<:IssueDraft:852596025147523102>"  # Not currently used by GitHub, but here for future.
     pull_request_open = "<:PROpen:852596471505223781>"
     pull_request_closed = "<:PRClosed:852596024732286976>"
     pull_request_draft = "<:PRDraft:852596025045680218>"
@@ -99,7 +110,7 @@ class Emojis:
         6: "\u0036\ufe0f\u20e3",
         7: "\u0037\ufe0f\u20e3",
         8: "\u0038\ufe0f\u20e3",
-        9: "\u0039\ufe0f\u20e3"
+        9: "\u0039\ufe0f\u20e3",
     }
 
     confirmation = "\u2705"
@@ -133,7 +144,10 @@ class Emojis:
     lemon_pensive = "<:lemon_pensive:754441880246419486>"
 
 
+# pylint: disable-next=too-few-public-methods
 class Colours:
+    """Named color constants"""
+
     blue = 0x0279FD
     twitter_blue = 0x1DA1F2
     bright_green = 0x01D277

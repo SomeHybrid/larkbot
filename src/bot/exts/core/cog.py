@@ -1,3 +1,5 @@
+"""Setup cog"""
+
 from discord.ext import commands
 
 from bot.bot import Bot

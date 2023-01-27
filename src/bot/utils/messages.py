@@ -1,3 +1,5 @@
+"""Message utils"""
+
 import logging
 import re
 from typing import Callable, Optional, Union
@@ -16,14 +18,16 @@ def sub_clyde(username: Optional[str]) -> Optional[str]:
     Discord disallows "clyde" anywhere in the username for webhooks. It will return a 400.
     Return None only if `username` is None.
     """
+
     def replace_e(match: re.Match) -> str:
+        """Replace e's with Cyrillic e's"""
         char = "е" if match[2] == "e" else "Е"
         return match[1] + char
 
     if username:
         return re.sub(r"(clyd)(e)", replace_e, username, flags=re.I)
-    else:
-        return username  # Empty string or None
+
+    return username  # Empty string or None
 
 
 async def get_discord_message(ctx: Context, text: str) -> Union[Message, str]:
@@ -67,7 +71,15 @@ async def get_text_and_embed(ctx: Context, text: str) -> tuple[str, Optional[Emb
     return text, embed
 
 
-def convert_embed(func: Callable[[str, ], str], embed: Embed) -> Embed:
+def convert_embed(
+    func: Callable[
+        [
+            str,
+        ],
+        str,
+    ],
+    embed: Embed,
+) -> Embed:
     """
     Converts the text in an embed using a given conversion function, then return the embed.
 

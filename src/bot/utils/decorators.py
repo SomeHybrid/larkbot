@@ -1,3 +1,5 @@
+"""Decorators utils"""
+
 import logging
 from typing import Callable
 
@@ -10,7 +12,10 @@ log = logging.getLogger(__name__)
 
 
 def with_permission(permission: Permissions) -> Callable:
+    """Check if user has ``permission``"""
+
     async def predicate(ctx: Context) -> bool:
+        """predicate check"""
         if not ctx.guild:  # Return False in a DM
             log.debug(
                 f"{ctx.author} tried to use the '{ctx.command.name}'command from a DM. "
@@ -18,7 +23,9 @@ def with_permission(permission: Permissions) -> Callable:
             )
             return False
 
+        # pylint: disable-next=import-outside-toplevel
         from .guild_data import guilds
+
         role_ids: list[int] = guilds[ctx.guild.id]["permissions"][permission.value]
         for role in ctx.author.roles:
             if role.id in role_ids:

@@ -1,3 +1,5 @@
+"""Main runner"""
+
 import asyncio
 from os import getenv
 
@@ -18,6 +20,7 @@ intents.message_content = True
 
 
 def get_prefix(bot_, message_):
+    """Get bot command prefixes"""
     extras = getenv("PREFIXES", "!").split(",")
     return commands.when_mentioned_or(*extras)(bot_, message_)
 

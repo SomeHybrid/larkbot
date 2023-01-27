@@ -1,3 +1,5 @@
+"""Larkbot, a bot for Lark"""
+
 import logging
 
 # Some basic logging to get existing loggers to show
