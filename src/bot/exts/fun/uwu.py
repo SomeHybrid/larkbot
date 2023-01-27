@@ -1,3 +1,5 @@
+"""The ancient arts of Uwuification"""
+
 import random
 import re
 import typing as t

@@ -1,4 +1,4 @@
-# FIXME: implement a database
+"""Temporary ID cache until database is implemented"""
 guilds = {
     954235291588247603: {
         "github_organization": "darbiadev",

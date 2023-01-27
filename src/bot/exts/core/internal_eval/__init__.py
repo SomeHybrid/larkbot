@@ -1,3 +1,5 @@
+"""Internal eval"""
+
 from bot.bot import Bot
 
 

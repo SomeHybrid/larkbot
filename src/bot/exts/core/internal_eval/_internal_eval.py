@@ -1,3 +1,5 @@
+"""Internal eval"""
+
 import logging
 import re
 import textwrap

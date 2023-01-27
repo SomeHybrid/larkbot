@@ -1,3 +1,5 @@
+"""Internal eval helpers"""
+
 import ast
 import collections
 import contextlib

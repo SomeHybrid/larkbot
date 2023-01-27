@@ -1,3 +1,5 @@
+"""Message utils"""
+
 import logging
 import re
 from typing import Callable, Optional, Union
@@ -18,6 +20,7 @@ def sub_clyde(username: Optional[str]) -> Optional[str]:
     """
 
     def replace_e(match: re.Match) -> str:
+        """Replace e's with Cyrillic e's"""
         char = "е" if match[2] == "e" else "Е"
         return match[1] + char
 

@@ -1,3 +1,5 @@
+"""Bot subclass"""
+
 from types import ModuleType
 
 import aiohttp
