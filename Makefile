@@ -1,4 +1,4 @@
-.DEFAULT_GOAL := install-dev
+default: init install-dev
 
 .PHONY: init
 init:

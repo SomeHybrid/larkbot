@@ -74,7 +74,7 @@ class Emoji:
         return bot.get_emoji(self.uid) is not None
 
     @classmethod
-    def from_match(cls, match: tuple[str, str, str]) -> t.Optional['Emoji']:
+    def from_match(cls, match: tuple[str, str, str]) -> t.Optional["Emoji"]:
         """Creates an Emoji from a regex match tuple."""
         if not match or len(match) != 3 or not match[2].isdecimal():
             return None
@@ -128,18 +128,12 @@ class Uwu(Cog):
         groups = REGEX_EMOJI.findall(input_string)
         emojis = {Emoji.from_match(match) for match in groups}
         # Replace with random emoticon if unable to display
-        emojis_map = {
-            re.escape(str(e)): random.choice(EMOJIS)
-            for e in emojis if e and not e.can_display(self.bot)
-        }
+        emojis_map = {re.escape(str(e)): random.choice(EMOJIS) for e in emojis if e and not e.can_display(self.bot)}
         if emojis_map:
             # Pattern for all emoji markdowns to be replaced
             emojis_re = re.compile("|".join(emojis_map.keys()))
             # Replace matches with random emoticon
-            return emojis_re.sub(
-                lambda m: emojis_map[re.escape(m.group())],
-                input_string
-            )
+            return emojis_re.sub(lambda m: emojis_map[re.escape(m.group())], input_string)
         # Return original if no replacement
         return input_string
 
@@ -154,7 +148,13 @@ class Uwu(Cog):
         input_string = self._ext_emoji_replace(input_string)
         return input_string
 
-    @commands.command(name="uwu", aliases=("uwuwize", "uwuify",))
+    @commands.command(
+        name="uwu",
+        aliases=(
+            "uwuwize",
+            "uwuify",
+        ),
+    )
     async def uwu_command(self, ctx: Context, *, text: t.Optional[str] = None) -> None:
         """
         Echo an uwuified version the passed text.

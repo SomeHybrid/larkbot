@@ -19,6 +19,7 @@ def with_permission(permission: Permissions) -> Callable:
             return False
 
         from .guild_data import guilds
+
         role_ids: list[int] = guilds[ctx.guild.id]["permissions"][permission.value]
         for role in ctx.author.roles:
             if role.id in role_ids:

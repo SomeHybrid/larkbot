@@ -16,6 +16,7 @@ def sub_clyde(username: Optional[str]) -> Optional[str]:
     Discord disallows "clyde" anywhere in the username for webhooks. It will return a 400.
     Return None only if `username` is None.
     """
+
     def replace_e(match: re.Match) -> str:
         char = "е" if match[2] == "e" else "Е"
         return match[1] + char
@@ -67,7 +68,15 @@ async def get_text_and_embed(ctx: Context, text: str) -> tuple[str, Optional[Emb
     return text, embed
 
 
-def convert_embed(func: Callable[[str, ], str], embed: Embed) -> Embed:
+def convert_embed(
+    func: Callable[
+        [
+            str,
+        ],
+        str,
+    ],
+    embed: Embed,
+) -> Embed:
     """
     Converts the text in an embed using a given conversion function, then return the embed.
 

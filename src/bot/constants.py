@@ -1,6 +1,6 @@
+from enum import Enum
 from os import getenv
 from typing import NamedTuple
-from enum import Enum
 
 
 class Permissions(Enum):
@@ -99,7 +99,7 @@ class Emojis:
         6: "\u0036\ufe0f\u20e3",
         7: "\u0037\ufe0f\u20e3",
         8: "\u0038\ufe0f\u20e3",
-        9: "\u0039\ufe0f\u20e3"
+        9: "\u0039\ufe0f\u20e3",
     }
 
     confirmation = "\u2705"
