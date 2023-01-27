@@ -25,7 +25,7 @@ class Ping(commands.Cog):
     @commands.command(name="ping")
     async def ping(self, ctx: commands.Context) -> None:
         """Ping the bot to see its latency and state."""
-        embed = self._build_ping_embed() 
+        embed = self._build_ping_embed()
         await ctx.send(embed=embed)
 
     @app_commands.command(name="ping", description="Get gateway latency")
