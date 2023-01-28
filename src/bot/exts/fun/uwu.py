@@ -48,7 +48,7 @@ class Uwu(Cog):
 
         # Grabs the text from the embed for uwuification
         if embeds:
-            embed = messages.convert_embed(imsosorry.uwuify, embeds[0])
+            embed = messages.convert_embed(uwuify, embeds[0])
         else:
             # Parse potential message links in text
             text, embed = await messages.get_text_and_embed(ctx, text)
