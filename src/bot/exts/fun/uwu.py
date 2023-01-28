@@ -5,7 +5,7 @@ import typing as t
 import discord
 from discord.ext import commands
 from discord.ext.commands import Cog, Context, clean_content
-import imsosorry
+from imsosorry.uwuification import uwuify
 
 from bot.bot import Bot
 from bot.utils import helpers, messages
