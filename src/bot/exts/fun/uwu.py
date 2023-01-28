@@ -59,7 +59,7 @@ class Uwu(Cog):
 
         # Adds the text harvested from an embed to be put into another quote block.
         if text:
-            converted_text = imsosorry.uwuify(text)
+            converted_text = uwuify(text)
             converted_text = helpers.suppress_links(converted_text)
             converted_text = f">>> {converted_text.lstrip('> ')}"
         else:
