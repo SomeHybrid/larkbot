@@ -55,7 +55,7 @@ class Uwu(Cog):
 
             # If an embed is found, grab and uwuify its text
             if embed:
-                embed = messages.convert_embed(imsosorry.uwuify, embed)
+                embed = messages.convert_embed(uwuify, embed)
 
         # Adds the text harvested from an embed to be put into another quote block.
         if text:
